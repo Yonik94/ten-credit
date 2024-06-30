@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome",
+      "url": "https://www.10bis.co.il/next",
+      // Here it is!
+      "runtimeArgs": [
+        "--load-extension=${workspaceFolder}"
+      ]
+    }
+  ]
+}
