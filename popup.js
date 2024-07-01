@@ -4,7 +4,7 @@ async function getTokens() {
   return { authorizationToken, refreshToken };
 }
 
-async function getUserActiveOrders() {
+async function getUserOrdersList() {
   const { authorizationToken, refreshToken } = await getTokens();
   const headers =  {
     cookie: `Authorization=${authorizationToken.value}; RefreshToken=${refreshToken.value}`,
@@ -16,15 +16,15 @@ async function getUserActiveOrders() {
   });
   const data = await response.json();
   console.log('data',data);
-  return data?.Data?.userActiveOrders;
+  return data?.Data?.orderList;
 }
 
 async function renderActiveOrders() {
   const activeOrdersContainerElement = document.querySelector('.active-orders');
-  const activeOrders = await getUserActiveOrders();
-  console.log('activeOrders',activeOrders);
-  let innerHTML = `<h2>${activeOrders?.length} Active Orders</h2>`;
-  for (const order of activeOrders || []) {
+  const ordersList = await getUserOrdersList();
+  console.log('ordersList',ordersList);
+  let innerHTML = `<h2>${ordersList?.length} Active Orders</h2>`;
+  for (const order of ordersList || []) {
     innerHTML += `<div class="order">
       <h3>${order?.orderNumber}</h3>
       <p>${order?.orderDate}</p>
